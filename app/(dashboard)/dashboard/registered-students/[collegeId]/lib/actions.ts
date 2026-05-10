@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 type RegisteredStudentRow = {
   candidateId: string;
   name: string;
+  profilePhoto: string;
   email: string;
   phone: string;
   fatherName: string;
@@ -17,6 +18,7 @@ type RegisteredStudentRow = {
   mjcSubject: string;
   duration: string;
   collegeFee: string;
+  paymentStatus: string;
 };
 
 export async function getRegisteredStudentsByCollege(collegeId: string) {
@@ -61,11 +63,21 @@ export async function getRegisteredStudentsByCollege(collegeId: string) {
           select: {
             id: true,
             name: true,
+            profilePhoto: true,
             email: true,
             phone: true,
             fatherName: true,
             gender: true,
             dateOfBirth: true,
+            candidatePayments: {
+              orderBy: {
+                createdAt: "desc",
+              },
+              select: {
+                status: true,
+              },
+              take: 1,
+            },
           },
         },
         collegeSession: {
@@ -85,6 +97,7 @@ export async function getRegisteredStudentsByCollege(collegeId: string) {
       groupedCandidates.push({
         candidateId: candidate.candidate.id,
         name: candidate.candidate.name,
+        profilePhoto: candidate.candidate.profilePhoto,
         email: candidate.candidate.email,
         phone: candidate.candidate.phone,
         fatherName: candidate.candidate.fatherName,
@@ -95,6 +108,8 @@ export async function getRegisteredStudentsByCollege(collegeId: string) {
         mjcSubject: candidate.mjcSubject,
         duration: candidate.duration,
         collegeFee: candidate.collegeFee,
+        paymentStatus:
+          candidate.candidate.candidatePayments.at(0)?.status ?? "N/A",
       });
 
       candidatesBySession.set(sessionName, groupedCandidates);

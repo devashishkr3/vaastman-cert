@@ -16,6 +16,7 @@ import {
 } from "../lib/zod-type/type";
 import { useUpdateCollegeInfo } from "../query/mut-update-college";
 import { InputForm } from "./input-form";
+import { BackRedirect } from "@/components/back-redirect";
 
 export function MainForm({ collegeId }: { collegeId: string }) {
   const router = useRouter();
@@ -80,6 +81,7 @@ export function MainForm({ collegeId }: { collegeId: string }) {
 
   return (
     <form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+      <BackRedirect className="mb-4" href="/college" label="Back to College" method="href" />
       <InputForm
         domainOptions={college.domains
           .map((domain) => domain.name)

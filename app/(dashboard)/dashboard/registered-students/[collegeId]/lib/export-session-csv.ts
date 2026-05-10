@@ -1,15 +1,16 @@
 const csvColumns = [
+  { key: "universityRoll", label: "University Roll Number" },
   { key: "name", label: "Candidate Name" },
+  { key: "domainOrMainSubject", label: "Domain" },
+  { key: "phone", label: "Phone Number" },
+  { key: "paymentStatus", label: "Payment Status" },
+  { key: "collegeFee", label: "College Fee" },
   { key: "email", label: "Email" },
-  { key: "phone", label: "Phone" },
-  { key: "universityRoll", label: "University Roll" },
-  { key: "domainOrMainSubject", label: "Domain/Main Subject" },
   { key: "mjcSubject", label: "MJC Subject" },
   { key: "fatherName", label: "Father Name" },
   { key: "gender", label: "Gender" },
   { key: "dateOfBirth", label: "Date of Birth" },
   { key: "duration", label: "Duration" },
-  { key: "collegeFee", label: "College Fee" },
 ] as const;
 
 type CsvColumnKey = (typeof csvColumns)[number]["key"];

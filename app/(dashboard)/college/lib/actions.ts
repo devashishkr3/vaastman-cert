@@ -3,11 +3,11 @@
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { type CollegeSessionStatus, Role } from "@/lib/generated/prisma/enums";
 import {
   type AddCollegeSchema,
   addCollegeSchema,
 } from "./zod-type/college-info";
-import { Role } from "@/lib/generated/prisma/enums";
 
 export async function getCollegeInfo() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -101,5 +101,55 @@ export async function addCollegeInfo(data: AddCollegeSchema) {
   } catch (error) {
     console.log(error);
     return { success: false, message: "Failed to add college info" };
+  }
+}
+
+export async function updateCollegeSessionStatus(input: {
+  collegeId: string;
+  sessionId: string;
+  status: CollegeSessionStatus;
+}) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session) {
+    return { success: false, message: "Unauthorized" };
+  }
+
+  if (session.user.role !== Role.ADMIN) {
+    return { success: false, message: "Unauthorized" };
+  }
+
+  if (!input.collegeId.trim() || !input.sessionId.trim()) {
+    return { success: false, message: "Invalid session details" };
+  }
+
+  try {
+    const collegeSession = await prisma.collegeSession.findFirst({
+      where: {
+        id: input.sessionId,
+        collegeId: input.collegeId,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!collegeSession) {
+      return { success: false, message: "Session not found" };
+    }
+
+    const data = await prisma.collegeSession.update({
+      where: {
+        id: input.sessionId,
+      },
+      data: {
+        status: input.status,
+      },
+    });
+
+    return { success: true, data };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to update session status" };
   }
 }

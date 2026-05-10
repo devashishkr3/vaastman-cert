@@ -1,12 +1,48 @@
-import { ContentLayout } from "@/components/admin-panel/content-layout";
-import { getCollegeInfoById } from "../college/edit/[id]/lib/actions";
+"use client";
 
-export default async function TestPage() {
-  const { data } = await getCollegeInfoById("cmoyum29j0001tzczgo1guxk3");
-  console.log(JSON.stringify(data, null, 2));
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ContentLayout } from "@/components/admin-panel/content-layout";
+
+interface BackRedirectProps {
+  /** Where to navigate back to */
+  href: string;
+  /** Label shown in the pill, e.g. "Back to products" */
+  label: string;
+  /** Extra className on the pill */
+  className?: string;
+}
+
+export function BackRedirect({ href, label, className }: BackRedirectProps) {
+  const router = useRouter();
+
   return (
-    <ContentLayout title="Test">
-      <div className="h-screen w-full bg-red-500 text-white flex">Hello</div>
-    </ContentLayout>
+    <button
+      onClick={() => router.replace(href)}
+      className={cn(
+        "inline-flex items-center gap-1.5",
+        "px-3 py-1.5 rounded-full",
+        "border border-border bg-background",
+        "text-sm text-muted-foreground",
+        "transition-colors duration-100",
+        "hover:bg-muted hover:text-foreground hover:border-input",
+        "active:scale-[0.97]",
+        "cursor-pointer select-none",
+        className
+      )}
+    >
+      <ArrowLeft className="h-3.5 w-3.5" />
+      {label}
+    </button>
   );
+}
+
+export default function Page() {
+  return (
+    <ContentLayout title="hi there">
+
+    <BackRedirect href="/dashboard" label="Back to dashboard" />
+    </ContentLayout>
+  )
 }

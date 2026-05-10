@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NAVBAR_HEIGHT } from "@/lib/constants";
 import { columns } from "./column";
+import { BackRedirect } from "@/components/back-redirect";
 
 type RegisteredStudentsProps = {
   collegeId: string;
@@ -42,9 +43,7 @@ export function RegisteredStudents({ collegeId }: RegisteredStudentsProps) {
   if (!data?.sessions.length) {
     return (
       <div className="mx-auto">
-        <Button variant="link" className="px-0 text-muted-foreground" asChild>
-          <Link href="/dashboard">Back to Dashboard</Link>
-        </Button>
+        <BackRedirect href="/dashboard" label="Back to Dashboard" method="href" />
 
         <Card className="border-dashed">
           <CardHeader>
@@ -60,9 +59,7 @@ export function RegisteredStudents({ collegeId }: RegisteredStudentsProps) {
 
   return (
     <div className="">
-      <Button variant="link" className="px-0 text-muted-foreground" asChild>
-        <Link href="/dashboard">Back to Dashboard</Link>
-      </Button>
+      <BackRedirect className="mb-4" href="/dashboard" label="Back to Dashboard" method="href" />
 
       <div>
         <h3 className="font-semibold">

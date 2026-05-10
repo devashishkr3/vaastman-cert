@@ -2,6 +2,8 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import type { useGetRegisteredStudents } from "@/app/(dashboard)/dashboard/registered-students/[collegeId]/query/use-get-registered-students";
+import { CandidateCell } from "./candidate-cell";
+import { PaymentStatusBadge } from "./payment-status-badge";
 
 export type RegisteredStudentsRow = NonNullable<
   ReturnType<typeof useGetRegisteredStudents>["data"]
@@ -9,27 +11,33 @@ export type RegisteredStudentsRow = NonNullable<
 
 export const columns: ColumnDef<RegisteredStudentsRow>[] = [
   {
-    accessorKey: "name",
+    id: "candidate",
     header: "Candidate Name",
+    cell: ({ row }) => (
+      <CandidateCell
+        name={row.original.name}
+        profilePhoto={row.original.profilePhoto}
+        universityRoll={row.original.universityRoll}
+      />
+    ),
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "domainOrMainSubject",
+    header: "Domain",
   },
   {
     accessorKey: "phone",
     header: "Phone",
   },
   {
-    accessorKey: "universityRoll",
-    header: "University Roll",
+    accessorKey: "collegeFee",
+    header: "Fee",
   },
   {
-    accessorKey: "domainOrMainSubject",
-    header: "Domain/Main Subject",
-  },
-  {
-    accessorKey: "mjcSubject",
-    header: "MJC Subject",
+    accessorKey: "paymentStatus",
+    header: "Payment Status",
+    cell: ({ row }) => (
+      <PaymentStatusBadge status={row.original.paymentStatus} />
+    ),
   },
 ];

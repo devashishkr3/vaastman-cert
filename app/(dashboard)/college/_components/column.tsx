@@ -1,8 +1,9 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import type { useGetCollegeInfo } from "@/app/(dashboard)/college/query/use-get-collegeInfo";
-import { Button } from "@/components/ui/button";
+import { SessionDialog } from "./session-dialog";
 
 export type CollegeInfoRow = NonNullable<
   ReturnType<typeof useGetCollegeInfo>["data"]
@@ -55,12 +56,28 @@ export const columns: ColumnDef<CollegeInfoRow>[] = [
       </button>
     ),
   },
-  
+
   {
     id: "actions",
     header: "Actions",
-    cell: ({ row}) => (
-      <a href={`/college/edit/${row.original.id}`} className="hover:underline ">Edit</a>
+    cell: ({ row }) => (
+      <div className="flex items-center gap-3">
+        <Link
+          href={`/college/edit/${row.original.id}`}
+          className="hover:underline"
+        >
+          Edit
+        </Link>
+        <SessionDialog
+          collegeId={row.original.id}
+          sessions={row.original.sessions.map((session) => ({
+            id: session.id,
+            name: session.name,
+            fees: session.fees,
+            status: session.status,
+          }))}
+        />
+      </div>
     ),
   },
 ];

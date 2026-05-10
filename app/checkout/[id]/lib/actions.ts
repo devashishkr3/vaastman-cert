@@ -104,6 +104,23 @@ export async function getPaymentOrder(candidateId: string) {
     return { success: false, message: "Payment gateway is not configured" };
   }
 
+  const verifiedPayment = await prisma.candidate_Payment.findFirst({
+    where: {
+      candidateId: normalizedCandidateId,
+      status: "VERIFIED",
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (verifiedPayment) {
+    return {
+      success: false,
+      message: "Payment has already been completed for this candidate",
+    };
+  }
+
   const education = await prisma.candidate_Education.findFirst({
     where: { candidateId: normalizedCandidateId },
     select: {

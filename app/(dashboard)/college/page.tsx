@@ -10,6 +10,7 @@ import { AddCollege } from "./_components/add-college";
 import { type CollegeInfoRow, columns } from "./_components/column";
 import { DataTable } from "./_components/data-table";
 import { useGetCollegeInfo } from "./query/use-get-collegeInfo";
+import { BackRedirect } from "@/components/back-redirect";
 
 export default function CollegePage() {
   const { data, isPending, error } = useGetCollegeInfo();
@@ -42,10 +43,8 @@ export default function CollegePage() {
   return (
     <ContentLayout title="Colleges">
       <div className="">
-        <div className="flex items-center justify-between">
-          <Button variant="link" className="px-0 text-muted-foreground" asChild>
-            <Link href="/dashboard">Back to Dashboard</Link>
-          </Button>
+        <div className="flex mb-2 md:mb-4 items-center justify-between">
+          <BackRedirect href="/dashboard" label="Back to dashboard" method="href" />
           <AddCollege domainOptions={domainOptions} />
         </div>
         <DataTable

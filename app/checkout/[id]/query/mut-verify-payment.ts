@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { verifyPayment } from "../lib/actions";
 
@@ -9,8 +9,6 @@ type VerifyPaymentPayload = {
 };
 
 export function useVerifyPayment(candidateId: string) {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data: VerifyPaymentPayload) => {
       const res = await verifyPayment({
@@ -23,11 +21,6 @@ export function useVerifyPayment(candidateId: string) {
       }
 
       return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["order", candidateId],
-      });
     },
     onError: (error) => {
       toast.error(error.message);
