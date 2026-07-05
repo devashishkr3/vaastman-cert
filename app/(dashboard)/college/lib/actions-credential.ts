@@ -39,7 +39,11 @@ export async function createCollegeCredential(data: CreateCredentialSchema) {
     // Look up the college
     const college = await prisma.college.findUnique({
       where: { id: parsed.data.collegeId },
-      select: { id: true, name: true, users: { select: { id: true }, where: { role: Role.COLLEGE } } },
+      select: {
+        id: true,
+        name: true,
+        users: { select: { id: true }, where: { role: Role.COLLEGE } },
+      },
     });
 
     if (!college) {

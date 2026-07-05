@@ -18,6 +18,7 @@ export type PaymentReceiptData = {
   email: string;
   phone: string;
   universityRoll: string;
+  collegeRoll: string;
   collegeName: string;
   session: string;
   course: string | null;
@@ -205,6 +206,7 @@ export function StudentDetails({ receipt }: ReceiptSectionProps) {
         // { label: "Email", value: receipt.email },
         // { label: "Phone", value: receipt.phone },
         { label: "University Roll No.", value: receipt.universityRoll },
+        { label: "College Roll No.", value: receipt.collegeRoll },
         { label: "College Name", value: receipt.collegeName },
         { label: "Session", value: receipt.session },
         // { label: "Course", value: formatNullable(receipt.course) },

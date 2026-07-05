@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   AccordionContent,
   AccordionItem,
@@ -33,7 +34,7 @@ function DesktopMenuItem({ item }: { item: MenuItem }) {
         asChild
         className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
       >
-        <a href={item.url}>{item.title}</a>
+        <Link href={item.url}>{item.title}</Link>
       </NavigationMenuLink>
     </NavigationMenuItem>
   );
@@ -56,9 +57,9 @@ function MobileMenuItem({ item }: { item: MenuItem }) {
   }
 
   return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
+    <Link key={item.title} href={item.url} className="text-md font-semibold">
       {item.title}
-    </a>
+    </Link>
   );
 }
 
@@ -78,12 +79,12 @@ function SubMenuLink({ item }: { item: MenuItem }) {
   );
 
   return (
-    <a
+    <Link
       className="hover:bg-muted hover:text-accent-foreground flex min-w-80 flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none"
       href={item.url}
     >
       {content}
-    </a>
+    </Link>
   );
 }
 

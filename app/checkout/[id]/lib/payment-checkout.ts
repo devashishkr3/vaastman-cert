@@ -86,7 +86,7 @@ export function getPayButtonLabel(payableAmount: number, isPending: boolean) {
     return "Loading...";
   }
 
-  return `Pay ₹${(payableAmount / 100).toFixed(2)}`;
+  return `Proceed ₹${(payableAmount / 100).toFixed(2)}`;
 }
 
 export function createPaymentSuccessSearchParams(data: {

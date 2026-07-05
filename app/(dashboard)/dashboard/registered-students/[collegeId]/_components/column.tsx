@@ -18,6 +18,7 @@ export const columns: ColumnDef<RegisteredStudentsRow>[] = [
         name={row.original.name}
         profilePhoto={row.original.profilePhoto}
         universityRoll={row.original.universityRoll}
+        collegeRoll={row.original.collegeRoll}
       />
     ),
   },

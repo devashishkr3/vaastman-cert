@@ -480,3 +480,97 @@ export async function recordPaymentFailure(data: RecordPaymentFailureInput) {
     return { success: false, message: "Failed to record payment failure" };
   }
 }
+
+/**
+ * Records the exact timestamp when a candidate accepts the Terms and Conditions.
+ * Stored on the candidate record for legal audit purposes.
+ * @param candidateId - The ID of the candidate accepting the T&C
+ */
+export async function recordTermsAcceptance(candidateId: string) {
+  const normalizedCandidateId = candidateId.trim();
+
+  if (!normalizedCandidateId) {
+    return { success: false, message: "Invalid candidate id" };
+  }
+
+  try {
+    await prisma.candidate_Personal.update({
+      where: { id: normalizedCandidateId },
+      data: { termsAcceptedAt: new Date() },
+    });
+
+    return { success: true, data: null };
+  } catch {
+    return {
+      success: false,
+      message: "Failed to record terms acceptance",
+    };
+  }
+}
+
+/**
+ * Records the exact timestamp when a candidate accepts the Privacy Policy.
+ * Stored on the candidate record for legal audit purposes.
+ * @param candidateId - The ID of the candidate accepting the Privacy Policy
+ */
+export async function recordPrivacyAcceptance(candidateId: string) {
+  const normalizedCandidateId = candidateId.trim();
+
+  if (!normalizedCandidateId) {
+    return { success: false, message: "Invalid candidate id" };
+  }
+
+  try {
+    await prisma.candidate_Personal.update({
+      where: { id: normalizedCandidateId },
+      data: { privacyAcceptedAt: new Date() },
+    });
+
+    return { success: true, data: null };
+  } catch {
+    return {
+      success: false,
+      message: "Failed to record privacy policy acceptance",
+    };
+  }
+}
+
+/**
+ * Returns the current agreement acceptance status for a candidate.
+ * Used by the checkout form to pre-check boxes if already accepted.
+ * @param candidateId - The ID of the candidate
+ */
+export async function getAgreementStatus(candidateId: string) {
+  const normalizedCandidateId = candidateId.trim();
+
+  if (!normalizedCandidateId) {
+    return { success: false, message: "Invalid candidate id" };
+  }
+
+  try {
+    const candidate = await prisma.candidate_Personal.findUnique({
+      where: { id: normalizedCandidateId },
+      select: {
+        termsAcceptedAt: true,
+        privacyAcceptedAt: true,
+      },
+    });
+
+    if (!candidate) {
+      return { success: false, message: "Candidate not found" };
+    }
+
+    return {
+      success: true,
+      data: {
+        termsAccepted: candidate.termsAcceptedAt !== null,
+        privacyAccepted: candidate.privacyAcceptedAt !== null,
+      },
+    };
+  } catch {
+    return {
+      success: false,
+      message: "Failed to fetch agreement status",
+    };
+  }
+}

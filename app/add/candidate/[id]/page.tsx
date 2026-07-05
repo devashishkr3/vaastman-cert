@@ -47,7 +47,7 @@ export default function Page() {
   useEffect(() => {
     if (!candidateId || !isValidCuid(candidateId)) {
       // Redirect to parent /add route which will generate a new valid CUID
-      window.location.href = "/add/candidate";
+      router.replace("/add/candidate");
     } else if (tabParam !== currentTab) {
       // If tab was invalid, update URL to show correct tab
       router.replace(`/add/candidate/${candidateId}?tab=${currentTab}`);

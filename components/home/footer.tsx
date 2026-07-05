@@ -7,6 +7,7 @@ import {
   IconMapPin,
   IconPhoneFilled,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 const services = [
   { label: "Web Development", href: "#" },
@@ -56,7 +57,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <a href="/home" className="w-fit">
+            <Link href="/home" className="w-fit">
               <span className="text-xl font-extrabold tracking-tight text-primary">
                 Vaastman
               </span>
@@ -64,7 +65,7 @@ export function Footer() {
                 {" "}
                 Solutions
               </span>
-            </a>
+            </Link>
             <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
               A full-stack digital agency crafting high-performance websites,
               apps, and digital experiences that deliver real results.

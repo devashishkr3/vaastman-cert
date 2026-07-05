@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { IconFaceIdError, IconHomeFilled } from "@tabler/icons-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
@@ -12,7 +12,8 @@ export default function NotFound() {
         404 - Page Not Found
       </h1>
       <p className="mt-4 text-muted-foreground max-w-md mx-auto">
-        Oops! The page you are looking for doesn't exist or has been moved. Let's get you back on track.
+        Oops! The page you are looking for doesn't exist or has been moved.
+        Let's get you back on track.
       </p>
       <Button asChild className="mt-8 gap-2">
         <Link href="/">

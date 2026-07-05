@@ -14,6 +14,7 @@ type RegisteredStudentRow = {
   gender: string;
   dateOfBirth: string;
   universityRoll: string;
+  collegeRoll: string;
   domainOrMainSubject: string;
   mjcSubject: string;
   duration: string;
@@ -118,6 +119,7 @@ export async function getRegisteredStudentsByCollege(collegeId: string) {
         gender: candidate.candidate.gender,
         dateOfBirth: candidate.candidate.dateOfBirth,
         universityRoll: candidate.universityRoll,
+        collegeRoll: candidate.collegeRoll,
         domainOrMainSubject: candidate.domainOrMainSubject,
         mjcSubject: candidate.mjcSubject,
         duration: candidate.duration,

@@ -20,7 +20,6 @@ model Candidate_Payment {
   orderPayload      Json?
   paymentPayload    Json?
   webhookPayload    Json?
-
   candidate Candidate_Personal @relation(fields: [candidateId], references: [id], onDelete: Restrict)
 
   createdAt DateTime @default(now())

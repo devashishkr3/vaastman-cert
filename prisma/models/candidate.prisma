@@ -8,6 +8,9 @@ model Candidate_Personal {
   gender       Gender
   dateOfBirth  String
 
+  termsAcceptedAt   DateTime?
+  privacyAcceptedAt DateTime?
+
   candidateEducations     Candidate_Education[]
   candidateCertifications Candidate_Certification[]
   candidatePayments       Candidate_Payment[]
@@ -25,6 +28,7 @@ model Candidate_Education {
   collegeId           String
   collegeSessionId    String
   universityRoll      String
+  collegeRoll         String
   grade               String?
   marks               Float?
   collegeFee          String

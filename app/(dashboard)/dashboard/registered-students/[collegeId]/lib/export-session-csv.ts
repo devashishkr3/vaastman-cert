@@ -1,5 +1,6 @@
 const csvColumns = [
   { key: "universityRoll", label: "University Roll Number" },
+  { key: "collegeRoll", label: "College Roll Number" },
   { key: "name", label: "Candidate Name" },
   { key: "domainOrMainSubject", label: "Domain" },
   { key: "phone", label: "Phone Number" },

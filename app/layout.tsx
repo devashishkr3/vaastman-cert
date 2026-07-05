@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import "./typography.css";
 import { Toaster } from "sonner";
 import { QueryProviders } from "@/components/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
+  weight: ["500"],
   subsets: ["latin"],
 });
 
@@ -37,9 +38,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-mono">
+      <body className="min-h-full flex flex-col font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -54,7 +55,7 @@ export default function RootLayout({
           position="top-right"
           richColors
           closeButton
-          theme="dark"
+          theme="light"
           offset={{ top: "8px" }}
           mobileOffset={{ top: "6px" }}
         />

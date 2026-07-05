@@ -86,4 +86,3 @@ export const columns: ColumnDef<CollegeInfoRow>[] = [
     ),
   },
 ];
-

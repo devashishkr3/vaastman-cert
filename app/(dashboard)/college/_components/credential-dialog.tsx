@@ -7,8 +7,8 @@ import {
   IconShieldCheckFilled,
 } from "@tabler/icons-react";
 import { useCallback, useEffect, useState } from "react";
-import { useCreateCollegeCredential } from "@/app/(dashboard)/college/query/mut-create-credential";
 import { getCollegeCredentialStatus } from "@/app/(dashboard)/college/lib/actions-credential";
+import { useCreateCollegeCredential } from "@/app/(dashboard)/college/query/mut-create-credential";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -168,10 +168,7 @@ export function CredentialDialog({
           <div className="space-y-4">
             <div className="space-y-2">
               <Label>Username (auto-generated)</Label>
-              <Input
-                value={generatedUsername}
-                disabled
-              />
+              <Input value={generatedUsername} disabled />
             </div>
             <div className="space-y-2">
               <Label htmlFor="credential-password">Password</Label>
@@ -200,9 +197,7 @@ export function CredentialDialog({
               disabled={password.length < 8 || isPending}
               onClick={handleCreate}
             >
-              <LoadingSwap isLoading={isPending}>
-                Create Credential
-              </LoadingSwap>
+              <LoadingSwap isLoading={isPending}>Create Credential</LoadingSwap>
             </Button>
           </div>
         )}

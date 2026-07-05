@@ -24,12 +24,14 @@ export function AddCandidateEducationForm({
 }: {
   candidateId: string;
 }) {
+
   const form = useForm<AddCandidateEducationSchema>({
     resolver: zodResolver(addCandidateEducationSchema),
     defaultValues: {
       id: candidateId,
       universityId: "",
       universityRoll: "",
+      collegeRoll: "",
       collegeId: "",
       collegeSessionId: "",
       collegeFee: "",
@@ -39,12 +41,13 @@ export function AddCandidateEducationForm({
     },
   });
 
-  const { mutateAsync: addCandidateEducation, isPending } =
+  const { mutateAsync: addCandidateEducation, isPending, isSuccess } =
     useAddCandidateEducation({ candidateId });
 
-  const onSubmit = (data: AddCandidateEducationSchema) => {
-    addCandidateEducation(data);
-    window.location.href = `/checkout/${candidateId}`;
+  const isDisabled = isPending || isSuccess;
+
+  const onSubmit = async (data: AddCandidateEducationSchema) => {
+    await addCandidateEducation(data);
   };
 
   return (
@@ -63,12 +66,12 @@ export function AddCandidateEducationForm({
         </CardContent>
         <CardFooter className="justify-center">
           <Button
-            disabled={isPending}
+            disabled={isDisabled}
             className="px-8 text-base"
             size="lg"
             type="submit"
           >
-            <LoadingSwap isLoading={isPending}>
+            <LoadingSwap isLoading={isDisabled}>
               Save Education Details
             </LoadingSwap>
           </Button>

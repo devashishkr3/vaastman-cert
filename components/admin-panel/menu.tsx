@@ -3,7 +3,6 @@
 import { Ellipsis, LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
 import { CollapseMenuButton } from "@/components/admin-panel/collapse-menu-button";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -13,6 +12,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { authClient } from "@/lib/auth-client";
 import { getMenuList } from "@/lib/menu-list";
 import { cn } from "@/lib/utils";
 

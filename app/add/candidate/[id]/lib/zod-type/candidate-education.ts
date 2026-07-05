@@ -7,6 +7,7 @@ export const addCandidateEducationSchema = z.object({
     .string()
     .trim()
     .min(1, { error: "University roll is required" }),
+  collegeRoll: z.string().trim().min(1, { error: "College roll is required" }),
 
   universityId: z
     .string()

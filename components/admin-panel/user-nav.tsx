@@ -3,7 +3,6 @@
 import { LayoutGrid, LogOut, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { authClient } from "@/lib/auth-client";
 
 export function UserNav() {
   const router = useRouter();
@@ -37,9 +37,7 @@ export function UserNav() {
   }
 
   const user = session.user;
-  const initials = user.name
-    ? user.name.substring(0, 2).toUpperCase()
-    : "US";
+  const initials = user.name ? user.name.substring(0, 2).toUpperCase() : "US";
 
   return (
     <DropdownMenu>
@@ -53,7 +51,9 @@ export function UserNav() {
               >
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={user.image || ""} alt={user.name} />
-                  <AvatarFallback className="bg-transparent">{initials}</AvatarFallback>
+                  <AvatarFallback className="bg-transparent">
+                    {initials}
+                  </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
@@ -87,8 +87,8 @@ export function UserNav() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem 
-          className="hover:cursor-pointer" 
+        <DropdownMenuItem
+          className="hover:cursor-pointer"
           onClick={async () => {
             await authClient.signOut();
             router.push("/signin");

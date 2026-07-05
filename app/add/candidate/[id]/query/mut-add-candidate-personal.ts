@@ -35,7 +35,7 @@ export function useAddCandidatePersonal({
         });
         //delay of 4 second
         setTimeout(() => {
-          window.location.href = "/home";
+          router.push("/home");
         }, 4000);
         return;
       }

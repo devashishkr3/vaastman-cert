@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
 import {
   createPaymentSuccessSearchParams,
@@ -17,7 +17,17 @@ import { getOrder } from "../query/get-order";
 import { useRecordPaymentFailure } from "../query/mut-record-payment-failure";
 import { useVerifyPayment } from "../query/mut-verify-payment";
 
-export function PaymentButton({ candidateId }: { candidateId: string }) {
+type PaymentButtonProps = {
+  candidateId: string;
+  allAccepted: boolean;
+  isSavingAgreements: boolean;
+};
+
+export function PaymentButton({
+  candidateId,
+  allAccepted,
+  isSavingAgreements,
+}: PaymentButtonProps) {
   const router = useRouter();
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const { data, isLoading, error } = useQuery(getOrder(candidateId));
@@ -82,7 +92,9 @@ export function PaymentButton({ candidateId }: { candidateId: string }) {
             paymentId: verification.paymentId,
           });
 
-          window.location.href = `/payment-overview/${candidateId}?${paymentSuccessParams}`;
+          router.push(
+            `/payment-overview/${candidateId}?${paymentSuccessParams}`,
+          );
         } catch (error) {
           console.error("Server-side payment verification failed:", error);
           // Note: Error toast is handled by useMutation's onError callback.
@@ -119,7 +131,10 @@ export function PaymentButton({ candidateId }: { candidateId: string }) {
           <AlertDescription>{paymentError}</AlertDescription>
         </Alert>
       )}
-      <Button onClick={handlePay} disabled={isPending || !data}>
+      <Button
+        onClick={handlePay}
+        disabled={isPending || !data || !allAccepted || isSavingAgreements}
+      >
         {getPayButtonLabel(payableAmount, isPending)}
       </Button>
     </div>

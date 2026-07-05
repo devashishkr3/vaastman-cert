@@ -13,6 +13,7 @@ type CandidateCellProps = {
   name: string;
   profilePhoto?: string | null;
   universityRoll: string;
+  collegeRoll: string;
 };
 
 function getInitials(name: string) {
@@ -29,6 +30,7 @@ export function CandidateCell({
   name,
   profilePhoto,
   universityRoll,
+  collegeRoll,
 }: CandidateCellProps) {
   return (
     <div className="flex items-center gap-3">
@@ -53,6 +55,21 @@ export function CandidateCell({
                 </button>
               </TooltipTrigger>
               <TooltipContent side="top">University roll number</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <span className="truncate ml-2">#{collegeRoll}</span>
+          <TooltipProvider disableHoverableContent>
+            <Tooltip delayDuration={100}>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  className="inline-flex items-center"
+                  aria-label="College roll number info"
+                >
+                  <IconInfoCircleFilled className="size-5" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top">College roll number</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>

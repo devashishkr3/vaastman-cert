@@ -26,6 +26,7 @@ export async function getPaymentReceipt(candidateId: string) {
         candidateEducations: {
           select: {
             universityRoll: true,
+            collegeRoll: true,
             duration: true,
             domainOrMainSubject: true,
             mjcSubject: true,
@@ -91,6 +92,7 @@ export async function getPaymentReceipt(candidateId: string) {
         email: candidate.email,
         phone: candidate.phone,
         universityRoll: education.universityRoll,
+        collegeRoll: education.collegeRoll,
         collegeName: education.college.name,
         session: education.collegeSession.name,
         course: education.mjcSubject,

@@ -1,6 +1,16 @@
-import { IconMailFilled, IconMapPinFilled, IconPhoneFilled } from "@tabler/icons-react";
+import {
+  IconMailFilled,
+  IconMapPinFilled,
+  IconPhoneFilled,
+} from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,7 +24,8 @@ export default function ContactUsPage() {
             Get in Touch
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a question or need assistance? Our team is here to help. Fill out the form below or reach out to us directly.
+            Have a question or need assistance? Our team is here to help. Fill
+            out the form below or reach out to us directly.
           </p>
         </div>
 
@@ -36,8 +47,10 @@ export default function ContactUsPage() {
                   <div>
                     <h3 className="font-semibold mb-1">Our Office</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      123 Innovation Drive<br />
-                      Tech District, Suite 400<br />
+                      123 Innovation Drive
+                      <br />
+                      Tech District, Suite 400
+                      <br />
                       New York, NY 10001
                     </p>
                   </div>
@@ -50,7 +63,8 @@ export default function ContactUsPage() {
                   <div>
                     <h3 className="font-semibold mb-1">Email Us</h3>
                     <p className="text-sm text-muted-foreground">
-                      support@vaastman.com<br />
+                      support@vaastman.com
+                      <br />
                       hello@vaastman.com
                     </p>
                   </div>
@@ -63,7 +77,8 @@ export default function ContactUsPage() {
                   <div>
                     <h3 className="font-semibold mb-1">Call Us</h3>
                     <p className="text-sm text-muted-foreground">
-                      +1 (555) 123-4567<br />
+                      +1 (555) 123-4567
+                      <br />
                       Mon-Fri, 9am - 6pm EST
                     </p>
                   </div>
@@ -96,7 +111,11 @@ export default function ContactUsPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" placeholder="john@example.com" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@example.com"
+                    />
                   </div>
 
                   <div className="space-y-2">

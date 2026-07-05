@@ -26,7 +26,7 @@ export function BackRedirect({
 
   const handleNavigation = () => {
     if (method === "href") {
-      window.location.href = href;
+      router.push(href);
     } else if (method === "push") {
       router.push(href);
     } else {

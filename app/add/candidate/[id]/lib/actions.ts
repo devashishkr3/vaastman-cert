@@ -117,6 +117,7 @@ export async function addCandidateEducationAction(
         collegeId: selectedCollege.id,
         collegeSessionId: selectedSession.id,
         universityRoll: parsedData.data.universityRoll,
+        collegeRoll: parsedData.data.collegeRoll,
         // grade: parsedData.data.grade,
         // marks: Number(parsedData.data.marks),
         collegeFee: selectedSession.fees,

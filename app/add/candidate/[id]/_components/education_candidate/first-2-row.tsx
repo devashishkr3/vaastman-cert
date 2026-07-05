@@ -36,6 +36,24 @@ export function FirstTwoRow({
 
       <Controller
         control={form.control}
+        name="collegeRoll"
+        render={({ field, fieldState }) => (
+          <Field>
+            <FieldLabel requiredLable>College Roll</FieldLabel>
+            <FieldContent>
+              <Input
+                {...field}
+                aria-invalid={fieldState.invalid}
+                placeholder="Enter college roll"
+              />
+              <FieldError errors={[fieldState.error]} />
+            </FieldContent>
+          </Field>
+        )}
+      />
+
+      <Controller
+        control={form.control}
         name="mjcSubject"
         render={({ field, fieldState }) => (
           <Field>
