@@ -5,6 +5,7 @@ import "./typography.css";
 import { Toaster } from "sonner";
 import { QueryProviders } from "@/components/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import Providers from "@/components/providers/progressbar-provider";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -41,16 +42,18 @@ export default function RootLayout({
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <QueryProviders>
-            <main>{children}</main>
-          </QueryProviders>
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <QueryProviders>
+              <main>{children}</main>
+            </QueryProviders>
+          </ThemeProvider>
+        </Providers>
         <Toaster
           position="top-right"
           richColors
