@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Achievements } from "@/components/home/achievements";
 import { Clients } from "@/components/home/clients";
 import { Hero } from "@/components/home/hero";
-import { Services } from "@/components/home/services";
+import { HowWeWork } from "@/components/home/how-we-work";
+import { ProjectShowcase } from "@/components/home/project-showcase";
+import { SquadShowcase } from "@/components/home/squad-showcase";
 import { WhyICanBeTrusted } from "@/components/why-i-can-be-trusted";
 
 const SITE_URL = "https://vaastman.com";
@@ -64,7 +66,9 @@ export default function Page() {
       />
       <Hero />
       <WhyICanBeTrusted />
-      <Services />
+      <ProjectShowcase />
+      <HowWeWork />
+      <SquadShowcase />
       <Clients />
     </>
   );
