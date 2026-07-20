@@ -1,0 +1,36 @@
+model Old_Student_Record {
+  id               String   @id @default(cuid())
+
+  // From CSV
+  name             String
+  fatherName       String
+  courseName       String // BA, BSc, BCom etc.
+  universityRollNo String   @unique
+  marks            Float?
+  registrationNo   String
+  collegeName      String
+  shortCollegeName String // used in certificate_no format
+  mobileNo         String
+  emailId          String?
+  dob              String
+  gender           String
+  honoursSubject   String
+
+  // Auto-generated
+  grade       String? // A+, A, B+, B, or null
+  isPrintable Boolean @default(false)
+  attendance  Float // random 85–95
+
+  // Fixed values
+  semester   Int      @default(5)
+  programHrs Int      @default(120)
+  issueDate  DateTime // 13 July of upload year
+
+  // Auto-generated certificate number
+  certificateNo String @unique // VSPL/<shortCollegeName>/<serial>/<year>
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("old_student_record")
+}

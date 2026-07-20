@@ -17,6 +17,8 @@ function Navbar1({
   },
   menu = [
     { title: "Candidate Registration", url: "/add/candidate" },
+    { title: "Verify Certificate", url: "/verify/internship" },
+    { title: "Download Certificate", url: "/download/internship" },
     { title: "Sign In", url: "/signin" },
   ],
   auth = {

@@ -1,0 +1,25 @@
+CSV Column Headers (exact match required):
+
+(c)name
+(c)father_name
+(c)course_name
+(c)university_roll_no
+(c)marks
+(c)registration_no
+(c)college_name
+(c)short_clg_name_for_certificate
+(c)mobile_no
+(c)email_id
+(c)dob
+(c)gender
+(c)honours_subject
+
+Auto-generated / Fixed fields:
+
+(a)grade (based on marks) here is condition for grade (if marks >= 16, A+; if 16 < marks >= 10, A; if 10 < marks >= 7, B+, if (7 < marks), B, if marks is 0 or not provided, then make grade null, and is_printable false
+(f)semester (5) fixed
+(f)program_hrs (120) fixed
+(a)is_printable   (based on marks, if not provided, then make it false), otherwise true
+(a)attendance (auto generated between 85-95%)
+(f)issue_date (13 july)
+(a)certificate_no (format: 'VSPL/<short_clg_name_for_certificate>/<GLOBAL_MAX_SERIAL_NO>/<UPLOAD_YEAR>')

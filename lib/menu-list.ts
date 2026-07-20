@@ -1,6 +1,8 @@
 import {
   IconBookmarkFilled,
   IconCalendarFilled,
+  IconCertificate,
+  IconFileTypeCsv,
   IconHomeFilled,
   IconLayoutDashboardFilled,
   IconSchoolFilled,
@@ -40,36 +42,6 @@ export function getMenuList(_pathname: string): Group[] {
         },
       ],
     },
-    // {
-    //   groupLabel: "",
-    //   menus: [
-    //     {
-    //       href: "",
-    //       label: "Posts",
-    //       icon: SquarePen,
-    //       submenus: [
-    //         {
-    //           href: "/posts",
-    //           label: "All Posts",
-    //         },
-    //         {
-    //           href: "/posts/new",
-    //           label: "New Post",
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       href: "/categories",
-    //       label: "Categories",
-    //       icon: Bookmark,
-    //     },
-    //     {
-    //       href: "/tags",
-    //       label: "Tags",
-    //       icon: Tag,
-    //     },
-    //   ],
-    // },
     {
       groupLabel: "",
       menus: [
@@ -87,6 +59,16 @@ export function getMenuList(_pathname: string): Group[] {
           href: "/add/candidate",
           label: "Internship",
           icon: IconUsers,
+        },
+        {
+          href: "/add/csv-old/student",
+          label: "CSV Upload (Old Students)",
+          icon: IconFileTypeCsv,
+        },
+        {
+          href: "/certificate/internship",
+          label: "Certificates",
+          icon: IconCertificate,
         },
         {
           href: "/home",
