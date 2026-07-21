@@ -14,7 +14,11 @@ export const csvRowSchema = z.object({
   college_name: z.string().min(1, "College name is required"),
   short_clg_name_for_certificate: z
     .string()
-    .min(1, "Short college name for certificate is required"),
+    .min(1, "Short college name for certificate is required")
+    .refine((val) => !/\s/.test(val.trim()), {
+      message:
+        "Short college name must be a single word (e.g. RDS, VLC, BS). Multi-word values like 'RDS COLLEGE' are not allowed.",
+    }),
   mobile_no: z.string().min(1, "Mobile no is required"),
   email_id: z.string(),
   dob: z.string().min(1, "Date of birth is required"),
