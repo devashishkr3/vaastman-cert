@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  IconCalendar,
   IconId,
   IconLoader2,
   IconSearch,
@@ -17,26 +16,23 @@ type DownloadFormProps = {
   }) => void;
   lookupAction: (
     identifier: string,
-    dob: string,
     fatherName: string,
   ) => Promise<{ success: boolean; message?: string; data?: unknown }>;
 };
 
 export function DownloadForm({ onResult, lookupAction }: DownloadFormProps) {
   const [identifier, setIdentifier] = useState("");
-  const [dob, setDob] = useState("");
   const [fatherName, setFatherName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!identifier.trim() || !dob.trim() || !fatherName.trim()) return;
+    if (!identifier.trim() || !fatherName.trim()) return;
 
     setIsLoading(true);
     try {
       const result = await lookupAction(
         identifier.trim(),
-        dob.trim(),
         fatherName.trim(),
       );
       onResult(result);
@@ -74,27 +70,6 @@ export function DownloadForm({ onResult, lookupAction }: DownloadFormProps) {
         />
       </div>
 
-      {/* Date of Birth */}
-      <div className="space-y-2">
-        <label
-          htmlFor="download-dob"
-          className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5"
-        >
-          <IconCalendar className="size-4" /> Date of Birth
-        </label>
-        <input
-          id="download-dob"
-          type="text"
-          value={dob}
-          onChange={(e) => setDob(e.target.value)}
-          placeholder="e.g. 15/03/2002 or 15-03-2002"
-          className="w-full px-4 py-3 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-          required
-        />
-        <p className="text-xs text-muted-foreground">
-          Enter exactly as it appears on your college records.
-        </p>
-      </div>
 
       {/* Father's Name */}
       <div className="space-y-2">

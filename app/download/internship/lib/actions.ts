@@ -20,19 +20,12 @@ export type DownloadCertificateData = {
 
 export async function lookupCertificateForDownload(
   identifier: string,
-  dob: string,
   fatherName: string,
 ) {
   if (!identifier || identifier.trim() === "") {
     return {
       success: false as const,
       message: "University Roll No. or Registration No. is required.",
-    };
-  }
-  if (!dob || dob.trim() === "") {
-    return {
-      success: false as const,
-      message: "Date of Birth is required.",
     };
   }
   if (!fatherName || fatherName.trim() === "") {
@@ -43,7 +36,6 @@ export async function lookupCertificateForDownload(
   }
 
   const cleanId = identifier.trim();
-  const cleanDob = dob.trim();
   const cleanFather = fatherName.trim().toLowerCase();
 
   try {
@@ -62,15 +54,6 @@ export async function lookupCertificateForDownload(
       };
     }
 
-    // Validate DOB match
-    const recordDob = record.dob.trim().toLowerCase();
-    const inputDob = cleanDob.toLowerCase();
-    if (recordDob !== inputDob) {
-      return {
-        success: false as const,
-        message: "Date of Birth does not match our records.",
-      };
-    }
 
     // Validate father name match (case-insensitive)
     if (record.fatherName.trim().toLowerCase() !== cleanFather) {

@@ -40,7 +40,7 @@ export default function DownloadInternshipPage() {
   return (
     <div className="min-h-screen bg-background text-foreground py-10 px-4 sm:px-6">
       {/* Brand Header */}
-      <header className="max-w-3xl mx-auto mb-10 flex items-center justify-between border-b border-border pb-4">
+      <header className="max-w-5xl mx-auto mb-10 flex items-center justify-between border-b border-border pb-4">
         <Link href="/" className="flex items-center gap-3 group">
           <Image
             src="/certificate/logo.png"
@@ -60,7 +60,7 @@ export default function DownloadInternshipPage() {
         </Link>
       </header>
 
-      <main className="max-w-3xl mx-auto">
+      <main className="max-w-5xl mx-auto">
         {certificateData ? (
           /* Certificate Preview + Download */
           <CertificatePreview data={certificateData} onBack={handleBack} />
@@ -113,7 +113,7 @@ export default function DownloadInternshipPage() {
         )}
       </main>
 
-      <footer className="max-w-3xl mx-auto mt-16 text-center text-xs text-muted-foreground border-t border-border pt-6 space-y-1">
+      <footer className="max-w-5xl mx-auto mt-16 text-center text-xs text-muted-foreground border-t border-border pt-6 space-y-1">
         <p>
           © {new Date().getFullYear()} Vaastman Solutions Pvt. Ltd. All rights
           reserved.
