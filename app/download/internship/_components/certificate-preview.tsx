@@ -38,6 +38,12 @@ async function captureElement(
     quality: 0.85,
     width,
     height,
+    timeout: 2000,
+    fetch: {
+      requestInit: {
+        cache: "force-cache",
+      },
+    },
   });
 }
 
@@ -55,6 +61,7 @@ export function CertificatePreview({ data, onBack }: CertificatePreviewProps) {
     courseName: data.courseName,
     universityRollNo: data.universityRollNo,
     gender: data.gender,
+    collegeName: data.collegeName,
   };
 
   const handleDownload = async () => {
@@ -207,8 +214,9 @@ export function CertificatePreview({ data, onBack }: CertificatePreviewProps) {
       <div
         style={{
           position: "fixed",
-          left: "-9999px",
-          top: "-9999px",
+          left: 0,
+          top: 0,
+          opacity: 0,
           pointerEvents: "none",
           zIndex: -9999,
         }}

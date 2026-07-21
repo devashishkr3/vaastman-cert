@@ -27,9 +27,27 @@ export type AttendanceSheetData = {
   courseName: string;
   universityRollNo: string;
   gender: string;
+  collegeName?: string;
 };
 
 /* ── Helpers ────────────────────────────────────────────────────── */
+
+/** Get pronouns and title based on gender */
+function getPronouns(gender: string) {
+  const g = gender.toLowerCase();
+  if (g === "male" || g === "m") {
+    return { title: "Mr.", subject: "he", possessive: "his", object: "him" };
+  }
+  if (g === "female" || g === "f") {
+    return { title: "Ms.", subject: "she", possessive: "her", object: "her" };
+  }
+  return {
+    title: "Mr./Ms.",
+    subject: "he/she",
+    possessive: "his/her",
+    object: "him/her",
+  };
+}
 
 /** Truncate a URL to a max character length, adding "..." */
 function truncateUrl(url: string, maxLen: number): string {
@@ -50,13 +68,7 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
   const col1 = ONLINE_ACTIVITIES.slice(0, mid);
   const col2 = ONLINE_ACTIVITIES.slice(mid);
 
-  const pronoun =
-    data.gender.toLowerCase() === "male" || data.gender.toLowerCase() === "m"
-      ? "his"
-      : data.gender.toLowerCase() === "female" ||
-          data.gender.toLowerCase() === "f"
-        ? "her"
-        : "his/her";
+  const { title, subject, possessive, object } = getPronouns(data.gender);
 
   return (
     <div
@@ -116,13 +128,14 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
           textAlign: "justify",
         }}
       >
-        This is to certify that Mr./ Ms. <strong>{data.name}</strong>,
-        University Roll No. <strong>{data.universityRollNo}</strong>,
-        Registration No. <strong>{data.registrationNo}</strong>,
-        {data.courseName}, MJC subject{" "}
-        <strong>{data.honoursSubject}</strong> has successfully gone through the
-        following online classes/activities as part of {pronoun} internship
-        requirement for the respective classes:
+        This is to certify that {title} <strong>{data.name}</strong>, a student
+        of <strong>{data.collegeName ?? "the institution"}</strong>, bearing
+        University Registration No. <strong>{data.registrationNo}</strong>, has
+        successfully completed {possessive} internship at Vaastman Solutions
+        Pvt. Ltd. with an overall attendance of 94%. Throughout the internship,{" "}
+        {subject} demonstrated dedication, punctuality, and professionalism. We
+        wish {object} continued success in all future academic and professional
+        endeavors.
       </div>
 
       {/* ── Section title ─────────────────────────────────── */}
@@ -149,7 +162,8 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
         {/* Column 1 */}
         <div style={{ flex: 1, minWidth: 0 }}>
           {col1.map((item) => {
-            const isTest = item.label.startsWith("Test");
+            const isHighlight =
+              item.label.startsWith("Test") || item.label.startsWith("Exam");
             return (
               <div
                 key={`${item.label}-1`}
@@ -164,7 +178,7 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
               >
                 <span
                   style={{
-                    color: isTest ? "#c0392b" : "#222",
+                    color: isHighlight ? "#c0392b" : "#222",
                     flexShrink: 0,
                     fontSize: "9px",
                   }}
@@ -173,8 +187,8 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
                 </span>
                 <span
                   style={{
-                    fontWeight: 600,
-                    color: "#222",
+                    fontWeight: isHighlight ? 700 : 600,
+                    color: isHighlight ? "#c0392b" : "#222",
                     flexShrink: 0,
                     whiteSpace: "nowrap",
                   }}
@@ -201,7 +215,8 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
         {/* Column 2 */}
         <div style={{ flex: 1, minWidth: 0 }}>
           {col2.map((item) => {
-            const isTest = item.label.startsWith("Test");
+            const isHighlight =
+              item.label.startsWith("Test") || item.label.startsWith("Exam");
             return (
               <div
                 key={`${item.label}-2`}
@@ -216,7 +231,7 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
               >
                 <span
                   style={{
-                    color: isTest ? "#c0392b" : "#222",
+                    color: isHighlight ? "#c0392b" : "#222",
                     flexShrink: 0,
                     fontSize: "9px",
                   }}
@@ -225,8 +240,8 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
                 </span>
                 <span
                   style={{
-                    fontWeight: 600,
-                    color: "#222",
+                    fontWeight: isHighlight ? 700 : 600,
+                    color: isHighlight ? "#c0392b" : "#222",
                     flexShrink: 0,
                     whiteSpace: "nowrap",
                   }}
@@ -255,20 +270,21 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
       <div
         style={{
           position: "absolute",
-          bottom: "20px",
+          bottom: "16px",
           right: "40px",
           display: "flex",
           alignItems: "center",
-          gap: "8px",
+          gap: "14px",
         }}
       >
         <span
           style={{
-            fontSize: "12px",
-            fontWeight: 600,
+            fontSize: "17px",
+            fontWeight: 700,
             fontStyle: "italic",
-            color: "#333",
+            color: "#111",
             fontFamily: notoSerif.style.fontFamily,
+            whiteSpace: "nowrap",
           }}
         >
           Vaastman Solutions Pvt. Ltd.
@@ -276,8 +292,8 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
         <Image
           src="/certificate/stamp.png"
           alt="Company Stamp"
-          width={50}
-          height={50}
+          width={110}
+          height={110}
           style={{ objectFit: "contain", height: "auto" }}
           unoptimized
         />

@@ -8,7 +8,7 @@ export type ActivityLink = {
   url: string;
 };
 
-/** Online activity links grouped by day/test */
+/** Online activity links grouped by day/exam */
 export const ONLINE_ACTIVITIES: ActivityLink[] = [
   {
     label: "Day - 01",
@@ -29,10 +29,6 @@ export const ONLINE_ACTIVITIES: ActivityLink[] = [
   {
     label: "Day - 05",
     url: "https://youtube.com/live/Xx0gVKTxp8k",
-  },
-  {
-    label: "Test - 01",
-    url: "https://forms.gle/Pqq9uQinzTc8CABR8",
   },
   {
     label: "Day - 06",
@@ -71,10 +67,6 @@ export const ONLINE_ACTIVITIES: ActivityLink[] = [
     url: "https://youtube.com/live/CaKlOVDPZlE?feature=share",
   },
   {
-    label: "Test - 02",
-    url: "https://forms.gle/ZNSzL7h3QVuh6yZx9",
-  },
-  {
     label: "Day - 15",
     url: "https://youtube.com/live/BvuuuJu2gcY?feature=share",
   },
@@ -93,10 +85,6 @@ export const ONLINE_ACTIVITIES: ActivityLink[] = [
   {
     label: "Day - 19",
     url: "https://youtube.com/live/rZPIUGjCKRA?feature=share",
-  },
-  {
-    label: "Test - 03",
-    url: "https://forms.gle/Pqq9uQinzTc8CABR8",
   },
   {
     label: "Day - 20",
@@ -139,10 +127,6 @@ export const ONLINE_ACTIVITIES: ActivityLink[] = [
     url: "https://www.youtube.com/live/prt-IscTXFE?si=_ra5ToXEWsLjAiBp",
   },
   {
-    label: "Test - 04",
-    url: "https://www.youtube.com/live/pduA8lF3zes?si=ugGJbcU03XRZTM-b",
-  },
-  {
     label: "Day - 30",
     url: "https://www.youtube.com/live/prt-IscTXFE?si=NCqO8DhwjfMf2tGX",
   },
@@ -157,6 +141,10 @@ export const ONLINE_ACTIVITIES: ActivityLink[] = [
   {
     label: "Day - 33",
     url: "https://www.youtube.com/live/SpVi9f1j-Bc?si=tki0Nnvd44i-6698",
+  },
+  {
+    label: "Exam",
+    url: "https://forms.gle/Pqq9uQinzTc8CABR8",
   },
 ];
 

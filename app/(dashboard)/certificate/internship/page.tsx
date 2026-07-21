@@ -67,6 +67,12 @@ async function captureElement(
     quality: 0.85,
     width,
     height,
+    timeout: 2000,
+    fetch: {
+      requestInit: {
+        cache: "force-cache",
+      },
+    },
   });
 }
 
@@ -90,6 +96,7 @@ export default function CertificatePage() {
         courseName: selected.courseName,
         universityRollNo: selected.universityRollNo,
         gender: selected.gender,
+        collegeName: selected.collegeName,
       }
     : null;
 
@@ -412,8 +419,9 @@ export default function CertificatePage() {
         <div
           style={{
             position: "fixed",
-            left: "-9999px",
-            top: "-9999px",
+            left: 0,
+            top: 0,
+            opacity: 0,
             pointerEvents: "none",
             zIndex: -9999,
           }}
