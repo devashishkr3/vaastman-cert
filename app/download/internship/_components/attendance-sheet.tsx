@@ -140,7 +140,6 @@ export function AttendanceSheet({ data }: { data: AttendanceSheetData }) {
       <br />
       <br />
       <br />
-      
 
       {/* ── Section title ─────────────────────────────────── */}
       <div

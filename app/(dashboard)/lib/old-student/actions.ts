@@ -8,6 +8,7 @@ import {
   computeGrade,
   computeIsPrintable,
   generateAttendance,
+  getTopicForCourse,
 } from "./csv-helpers";
 import {
   type UploadPayloadSchema,
@@ -175,7 +176,9 @@ export async function uploadOldStudents(payload: UploadPayloadSchema) {
         dob: row.dob,
         gender: row.gender,
         honoursSubject: row.honours_subject,
+        topic: getTopicForCourse(row.course_name),
         grade: computeGrade(marksValue),
+
         isPrintable: computeIsPrintable(marksValue),
         attendance: generateAttendance(),
         issueDate,
@@ -242,7 +245,9 @@ export async function getOldStudents() {
       dob: r.dob,
       gender: r.gender,
       honoursSubject: r.honoursSubject,
+      topic: r.topic ?? getTopicForCourse(r.courseName),
       grade: r.grade,
+
       isPrintable: r.isPrintable,
       attendance: r.attendance,
       semester: r.semester,

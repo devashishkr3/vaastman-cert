@@ -7,7 +7,27 @@ import { z } from "zod";
 export const csvRowSchema = z.object({
   name: z.string().min(1, "Name is required"),
   father_name: z.string().min(1, "Father name is required"),
-  course_name: z.string().min(1, "Course name is required"),
+  course_name: z
+    .string()
+    .min(1, "Course name is required")
+    .refine(
+      (val) => {
+        const norm = val.trim().toLowerCase();
+        return (
+          norm === "b.sc" ||
+          norm === "bsc" ||
+          norm === "b.a" ||
+          norm === "ba" ||
+          norm === "b.com" ||
+          norm === "bcom"
+        );
+      },
+      {
+        message:
+          "Invalid course name. Allowed courses are strictly B.Sc, B.A, or B.Com.",
+      },
+    ),
+
   university_roll_no: z.string().min(1, "University roll no is required"),
   marks: z.string(),
   registration_no: z.string().min(1, "Registration no is required"),

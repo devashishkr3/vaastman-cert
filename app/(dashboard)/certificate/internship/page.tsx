@@ -323,7 +323,9 @@ export default function CertificatePage() {
                             universityRollNo: student.universityRollNo,
                             collegeName: student.collegeName,
                             honoursSubject: student.honoursSubject,
+                            topic: student.topic,
                             grade: student.grade,
+
                             semester: student.semester,
                             programHrs: student.programHrs,
                             certificateNo: student.certificateNo,

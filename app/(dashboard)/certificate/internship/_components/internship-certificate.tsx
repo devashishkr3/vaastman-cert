@@ -30,6 +30,8 @@ const ebGaramond = EB_Garamond({
   display: "swap",
 });
 
+import { getTopicForCourse } from "@/app/(dashboard)/lib/old-student/csv-helpers";
+
 /* ── Types ─────────────────────────────────────────────────────── */
 
 export type CertificateData = {
@@ -39,6 +41,7 @@ export type CertificateData = {
   universityRollNo: string;
   collegeName: string;
   honoursSubject: string;
+  topic?: string | null;
   grade: string | null;
   semester: number;
   programHrs: number;
@@ -214,8 +217,12 @@ export function InternshipCertificate({ data }: InternshipCertificateProps) {
             <strong>{data.collegeName}</strong>. {subject} has successfully
             completed {possessive} <strong>{data.programHrs} hours</strong>{" "}
             internship program on topic of{" "}
-            <strong>{data.honoursSubject}</strong> &amp; obtained grade{" "}
-            <strong>{data.grade ?? "N/A"}</strong>.
+            <strong>
+              {data.topic ||
+                getTopicForCourse(data.courseName) ||
+                data.honoursSubject}
+            </strong>{" "}
+            &amp; obtained grade <strong>{data.grade ?? "N/A"}</strong>.
           </p>
 
           {/* Message */}

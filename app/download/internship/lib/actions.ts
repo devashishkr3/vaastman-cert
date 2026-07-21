@@ -1,5 +1,6 @@
 "use server";
 
+import { getTopicForCourse } from "@/app/(dashboard)/lib/old-student/csv-helpers";
 import { prisma } from "@/lib/db";
 
 export type DownloadCertificateData = {
@@ -9,6 +10,7 @@ export type DownloadCertificateData = {
   universityRollNo: string;
   collegeName: string;
   honoursSubject: string;
+  topic?: string | null;
   grade: string | null;
   semester: number;
   programHrs: number;
@@ -78,7 +80,9 @@ export async function lookupCertificateForDownload(
       universityRollNo: record.universityRollNo,
       collegeName: record.collegeName,
       honoursSubject: record.honoursSubject,
+      topic: record.topic ?? getTopicForCourse(record.courseName),
       grade: record.grade,
+
       semester: record.semester,
       programHrs: record.programHrs,
       certificateNo: record.certificateNo,

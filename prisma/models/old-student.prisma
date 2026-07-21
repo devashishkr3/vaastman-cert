@@ -15,6 +15,7 @@ model Old_Student_Record {
   dob              String
   gender           String
   honoursSubject   String
+  topic            String?
 
   // Auto-generated
   grade       String? // A+, A, B+, B, or null

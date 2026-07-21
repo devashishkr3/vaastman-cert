@@ -16,10 +16,12 @@ import {
   computeIsPrintable,
   EXPECTED_HEADERS,
   generateAttendance,
+  getTopicForCourse,
   sanitizeHeader,
   sanitizeValue,
   validateHeaders,
 } from "@/app/(dashboard)/lib/old-student/csv-helpers";
+
 import { useUploadOldStudents } from "@/app/(dashboard)/lib/old-student/query/mut-upload-old-students";
 import { csvRowSchema } from "@/app/(dashboard)/lib/old-student/zod-type/csv-schema";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -50,6 +52,7 @@ type ValidatedRow = {
   valid: boolean;
   errors: string[];
   // computed preview fields
+  topic: string;
   grade: string | null;
   isPrintable: boolean;
   attendance: number;
@@ -151,10 +154,24 @@ export default function OldStudentsUploadPage() {
         const effectiveMarks =
           marksNum !== null && !Number.isNaN(marksNum) ? marksNum : null;
 
+        let topic = "";
+        try {
+          topic = getTopicForCourse(record.course_name ?? "");
+        } catch (err) {
+          const msg =
+            err instanceof Error
+              ? err.message
+              : `Invalid course: ${record.course_name}`;
+          if (!errors.includes(msg)) {
+            errors.push(msg);
+          }
+        }
+
         return {
           raw: record,
-          valid: result.success,
+          valid: result.success && errors.length === 0,
           errors,
+          topic,
           grade: computeGrade(effectiveMarks),
           isPrintable: computeIsPrintable(effectiveMarks),
           attendance: generateAttendance(),
@@ -369,6 +386,7 @@ export default function OldStudentsUploadPage() {
                   {headers.map((h) => (
                     <TableHead key={h}>{h}</TableHead>
                   ))}
+                  <TableHead>topic</TableHead>
                   <TableHead>grade</TableHead>
                   <TableHead>is_printable</TableHead>
                   <TableHead>attendance</TableHead>
@@ -395,6 +413,10 @@ export default function OldStudentsUploadPage() {
                         {row.raw[h]}
                       </TableCell>
                     ))}
+                    <TableCell className="whitespace-nowrap font-medium text-primary">
+                      {row.topic || "—"}
+                    </TableCell>
+
                     <TableCell>
                       {row.grade ? (
                         <Badge variant="outline">{row.grade}</Badge>

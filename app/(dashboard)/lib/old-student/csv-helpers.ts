@@ -22,6 +22,33 @@ export const EXPECTED_HEADERS = [
 ] as const;
 
 /**
+ * Allowed courses for old student CSV upload
+ */
+export const ALLOWED_COURSES = ["B.Sc", "B.A", "B.Com"] as const;
+
+/**
+ * Course to Topic Mapping:
+ * - B.Sc -> Artificial Intelligence
+ * - B.A -> Digital Marketing
+ * - B.Com -> Social Media Management
+ */
+export function getTopicForCourse(courseName: string): string {
+  const normalized = courseName.trim().toLowerCase();
+  if (normalized === "b.sc" || normalized === "bsc") {
+    return "Artificial Intelligence";
+  }
+  if (normalized === "b.a" || normalized === "ba") {
+    return "Digital Marketing";
+  }
+  if (normalized === "b.com" || normalized === "bcom") {
+    return "Social Media Management";
+  }
+  throw new Error(
+    `Invalid course "${courseName}". Allowed courses are strictly B.Sc, B.A, or B.Com.`,
+  );
+}
+
+/**
  * Strip BOM, zero-width characters, and extra whitespace from a raw header
  * string. CSV files exported from Excel or Google Sheets often embed invisible
  * Unicode codepoints that break exact-match comparisons.
